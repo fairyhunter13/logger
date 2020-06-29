@@ -31,10 +31,7 @@ func Init(opts ...Options) (err error) {
 	logger.Options = []zap.Option{zap.AddCaller(), zap.AddCallerSkip(1)}
 
 	for _, opt := range opts {
-		err = opt(logger)
-		if err != nil {
-			return
-		}
+		opt(logger)
 	}
 
 	err = logger.Validate()
