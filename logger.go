@@ -7,7 +7,10 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-var logger *Logger
+var (
+	logger        *Logger
+	sugaredLogger *zap.SugaredLogger
+)
 
 // Logger specifies the logger instance for this package.
 type Logger struct {
@@ -112,7 +115,10 @@ func Panic(msg string, fields ...zap.Field) {
 // Sugar returns the sugared logger.
 func Sugar() *zap.SugaredLogger {
 	initLogger()
-	return logger.Sugar()
+	if sugaredLogger == nil {
+		sugaredLogger = logger.Sugar()
+	}
+	return sugaredLogger
 }
 
 // Sync flushes the buffer/resources inside the logger.
