@@ -27,7 +27,11 @@ func (l *Logger) Validate() (err error) {
 // Init initialize the logger local instance of this package.
 func Init(opts ...Options) (err error) {
 	logger = new(Logger)
-	logger.Core = zapcore.NewCore(zapcore.NewConsoleEncoder(zap.NewDevelopmentEncoderConfig()), os.Stdout, zap.NewAtomicLevelAt(zapcore.DebugLevel))
+	logger.Core = zapcore.NewCore(
+		zapcore.NewConsoleEncoder(zap.NewDevelopmentEncoderConfig()),
+		os.Stdout,
+		zap.NewAtomicLevelAt(zapcore.DebugLevel),
+	)
 	logger.Options = []zap.Option{zap.AddCaller(), zap.AddCallerSkip(1)}
 
 	for _, opt := range opts {
