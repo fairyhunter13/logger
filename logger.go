@@ -19,7 +19,7 @@ type Logger struct {
 // Validate validate the logger parameters that is required.
 func (l *Logger) Validate() (err error) {
 	if l.Core == nil || len(l.Options) == 0 {
-		err = ErrEmptyFuncOpts
+		err = ErrEmptyOpts
 	}
 	return
 }
